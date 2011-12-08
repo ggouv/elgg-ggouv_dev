@@ -28,4 +28,9 @@ function elgg_ggouv_dev_init() {
 	global $trace;
 	$trace  = new Trace("Test");
 	
+	//elgg_register_admin_menu_item('administer', 'apply_code', 'administer_utilities');
+	
+	$action_path = elgg_get_plugins_path() . 'elgg_ggouv_dev/actions';
+	elgg_register_action('elgg_ggouv_dev/apply_code', "$action_path/action_apply_code.php");
+	
 }
