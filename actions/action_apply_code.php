@@ -18,7 +18,7 @@ $plugin_name = $plugin->getManifest()->getName();
 $result = false;
 
 foreach ($params as $k => $v) {
-	$result = $plugin->setSetting($k, $v);
+	$result = elgg_set_plugin_setting($k, $v, 'elgg_ggouv_dev');
 	if (!$result) {
 		register_error(elgg_echo('plugins:settings:save:fail', array($plugin_name)));
 		forward(REFERER);

@@ -3,21 +3,24 @@
 // restrict to admins
 admin_gatekeeper();
 
-if (!isset($vars['entity']->firebug_to_apply)) {
-	$vars['entity']->firebug_to_apply = '';
+if (!elgg_get_plugin_setting('firebug_to_apply', 'elgg_ggouv_dev')) {
+	elgg_set_plugin_setting('firebug_to_apply', '', 'elgg_ggouv_dev');
 }
 
-if (!isset($vars['entity']->code_to_apply)) {
-	$vars['entity']->code_to_apply = '';
+if (!elgg_get_plugin_setting('code_to_apply', 'elgg_ggouv_dev')) {
+	elgg_set_plugin_setting('code_to_apply', '', 'elgg_ggouv_dev');
 }
 
-$firebug = $vars['entity']->firebug_to_apply;
-$code = $vars['entity']->code_to_apply;
-$container_guid = elgg_extract('container_guid', $vars);
+if (!elgg_get_plugin_setting('comment_translation_key', 'elgg_ggouv_dev')) {
+	elgg_set_plugin_setting('comment_translation_key', 0, 'elgg_ggouv_dev');
+}
+
+$firebug = elgg_get_plugin_setting('firebug_to_apply', 'elgg_ggouv_dev');
+$code = elgg_get_plugin_setting('code_to_apply', 'elgg_ggouv_dev');
 
 $set = str_replace("&gt;", ">", $firebug);
 eval("\$fire = $set;");
-global $fb; $fb->info($fire, 'result');
+global $fb; $fb->info($fire, 'result ');
 
 $set = str_replace("&gt;", ">", $code);
 eval("$set;");
@@ -34,3 +37,9 @@ eval("$set;");
 	<?php echo elgg_view('input/plaintext', array('name' => 'params[code_to_apply]', 'value' => $code)); ?>
 </div>
 
+<div>
+	<?php 
+	$data = array('name' => 'params[comment_translation_key]', 'value' => 1, 'checked' => elgg_get_plugin_setting('comment_translation_key', 'elgg_ggouv_dev') == 1);
+	echo elgg_view('input/checkbox', $data); ?>
+	<label><?php echo elgg_echo('Add translation key in html comment'); ?></label>
+</div>
