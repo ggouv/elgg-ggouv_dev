@@ -5,6 +5,8 @@ elgg_register_event_handler('init','system','elgg_ggouv_dev_init');
 function elgg_ggouv_dev_init() {
 	global $CONFIG;
 
+	//require_once dirname(__FILE__) . '/vendors/firelogger/firelogger.php';
+	require_once dirname(__FILE__) . '/vendors/chromephp/ChromePhp.php';
 	require_once dirname(__FILE__) . '/vendors/firephp/FirePHP.class.php';
 	require_once dirname(__FILE__) . '/vendors/firephp/fb.php';
 	class trace {
@@ -25,6 +27,20 @@ function elgg_ggouv_dev_init() {
 	//ob_start();
 	global $fb;
 	$fb = FirePHP::getInstance(true);
+	
+	$fb->setObjectFilter('stdClass', array('classes',
+										'language_paths',
+										'translations',
+										'site',
+										//'views',
+										'actions',
+										'externals',
+										'externals_map',
+										'independents',
+										'widgets',
+										'menus',
+										'wordblacklist'));
+
 	global $trace;
 	$trace  = new Trace("Test");
 	
