@@ -46,8 +46,8 @@ function elgg_ggouv_dev_init() {
 	
 	//elgg_register_admin_menu_item('administer', 'apply_code', 'administer_utilities');
 	
-	$action_path = elgg_get_plugins_path() . 'elgg_ggouv_dev/actions';
-	elgg_register_action('elgg_ggouv_dev/apply_code', "$action_path/action_apply_code.php");
+	$action_path = elgg_get_plugins_path() . 'elgg-ggouv_dev/actions';
+	elgg_register_action('elgg-ggouv_dev/apply_code', "$action_path/action_apply_code.php");
 	
 }
 
@@ -62,7 +62,7 @@ function elgg_ggouv_dev_init() {
  * @return string Either the translated string, the English string,
  * or the original language string.
  */
-function HACK_elgg_echo($message_key, $args = array(), $language = "") { //Be carefull ! Delete « HACK_ » and change name or comment elgg_echo function on engine/lib/languages.php line 96
+function HACK_elgg_echo($message_key, $args = array(), $language = "") { //Be carefull ! Delete « HACK_ » and change name or comment elgg_echo function on engine/lib/languages.php line 96
 	global $CONFIG;
 
 	static $CURRENT_LANGUAGE;

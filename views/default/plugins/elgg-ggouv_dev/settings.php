@@ -3,22 +3,23 @@
 // restrict to admins
 admin_gatekeeper();
 
-if (!elgg_get_plugin_setting('firebug_to_apply', 'elgg_ggouv_dev')) {
-	elgg_set_plugin_setting('firebug_to_apply', '', 'elgg_ggouv_dev');
+if (!elgg_get_plugin_setting('firebug_to_apply', 'elgg-ggouv_dev')) {
+	elgg_set_plugin_setting('firebug_to_apply', '', 'elgg-ggouv_dev');
 }
 
-if (!elgg_get_plugin_setting('code_to_apply', 'elgg_ggouv_dev')) {
-	elgg_set_plugin_setting('code_to_apply', '', 'elgg_ggouv_dev');
+if (!elgg_get_plugin_setting('code_to_apply', 'elgg-ggouv_dev')) {
+	elgg_set_plugin_setting('code_to_apply', '', 'elgg-ggouv_dev');
 }
 
-if (!elgg_get_plugin_setting('comment_translation_key', 'elgg_ggouv_dev')) {
-	elgg_set_plugin_setting('comment_translation_key', 0, 'elgg_ggouv_dev');
+if (!elgg_get_plugin_setting('comment_translation_key', 'elgg-ggouv_dev')) {
+	elgg_set_plugin_setting('comment_translation_key', 0, 'elgg-ggouv_dev');
 }
 
-$firebug = elgg_get_plugin_setting('firebug_to_apply', 'elgg_ggouv_dev');
-$code = elgg_get_plugin_setting('code_to_apply', 'elgg_ggouv_dev');
+$firebug = elgg_get_plugin_setting('firebug_to_apply', 'elgg-ggouv_dev');
+$code = elgg_get_plugin_setting('code_to_apply', 'elgg-ggouv_dev');
 
 $set = str_replace("&gt;", ">", $firebug);
+if (!$set) $set = "''";
 eval("\$fire = $set;");
 global $fb; $fb->info($fire, 'result ');
 
@@ -39,7 +40,7 @@ eval("$set;");
 
 <div>
 	<?php 
-	$data = array('name' => 'params[comment_translation_key]', 'value' => 1, 'checked' => elgg_get_plugin_setting('comment_translation_key', 'elgg_ggouv_dev') == 1);
+	$data = array('name' => 'params[comment_translation_key]', 'value' => 1, 'checked' => elgg_get_plugin_setting('comment_translation_key', 'elgg-ggouv_dev') == 1);
 	echo elgg_view('input/checkbox', $data); ?>
 	<label><?php echo elgg_echo('Add translation key in html comment'); ?></label>
 </div>
