@@ -1,0 +1,9 @@
+{
+  "config": {
+    "vendor-dir":"vendors"  
+  },  
+  "require" : 
+  {
+    "fzaninotto/faker": "dev-master"
+  }
+}

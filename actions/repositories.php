@@ -1,5 +1,8 @@
 <?php
 admin_gatekeeper();
+include_once(dirname(__FILE__).'/../vendors/Git.php');
+ini_set('display_errors',1);
+error_reporting(255);
 
 foreach(elgg_get_plugins(false) as $plugin)
 {
@@ -9,8 +12,8 @@ foreach(elgg_get_plugins(false) as $plugin)
     {
             if(in_array('.git', scandir($plugin->getPath())))
             {
-                $answer = shell_exec('cd ".$plugin->getPath()." && pwd');
-                var_dump($answer);
+                $repo = Git::open($plugin->getPath());
+                $repo->pull('origin', 'master');
             }
     }
 }
