@@ -4,6 +4,8 @@ include_once(dirname(__FILE__).'/../vendors/Git.php');
 ini_set('display_errors',1);
 error_reporting(255);
 
+$commands = array();
+
 foreach(elgg_get_plugins(false) as $plugin)
 {
     $plugin_path =  $plugin->getPath();
@@ -12,10 +14,12 @@ foreach(elgg_get_plugins(false) as $plugin)
     {
             if(in_array('.git', scandir($plugin->getPath())))
             {
-                $repo = Git::open($plugin->getPath());
-                $repo->pull('origin', 'master');
+            	$commands[] = ' cd '.$plugin->getPath().' && git pull ';
             }
     }
 }
-die();
-// forward(REFERER); 
+$command = implode ($commands, ' && ');
+exec($command, $output);
+var_dump($output);
+
+forward(REFERER); 
